@@ -1,0 +1,4 @@
+drop 0d62fcf77bddc05162096846411118f56bfd5c3f Omat muutokset
+drop fea383cd24cccc9c5371ed3f321260b14504c268 Uusi readme
+drop b766836d0330a3d5378080596575ed8c32451a3e gitignore
+pick 609cde5e54e666855d3865e4f96fd8ff5ac909c9 .gitignore oikein

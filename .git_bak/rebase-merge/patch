@@ -1,0 +1,65 @@
+diff --git a/posti.php b/posti.php
+deleted file mode 100644
+index 7fe01d3..0000000
+--- a/posti.php
++++ /dev/null
+@@ -1,59 +0,0 @@
+-<?php
+-require 'Exception.php';
+-require 'PHPMailer.php';
+-require 'SMTP.php';
+-
+-use PHPMailer\PHPMailer\PHPMailer;
+-use PHPMailer\PHPMailer\Exception;
+-
+-$to = "jukka.aula@omnia.fi";
+-define("PALVELU","mailtrap");
+-
+-function posti($emailTo,$msg,$subject){
+-if (PALVELU == 'sendgrid'){
+-/* SendGrid */      
+-$apikey = "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";    
+-$host = "smtp.sendgrid.net";
+-$port = 587;
+-$username = "apikey";
+-$password = $apikey;
+-}
+-
+-elseif (PALVELU == 'mailtrap'){
+-/* Mailtrap */
+-$host ='smtp.mailtrap.io';
+-$port = 2525;
+-$username = '4c704716314a1f';
+-$password = 'a5baadf8896168';
+-}
+-
+-$emailFrom = "wohjelmointi@gmail.com";
+-$emailFromName = "Ohjelmointikurssi";
+-$emailToName = "";
+-$mail = new PHPMailer();
+-$mail->isSMTP();
+-$mail->SMTPAuth = true;
+-$mail->Port = $port;
+-$mail->Username = $username;
+-$mail->Password = $password;
+-
+-$mail->CharSet = 'UTF-8';
+-$mail->SMTPDebug = 0; // 0 = off (for production use) - 1 = client messages - 2 = client and server messages
+-$mail->Host = $host; 
+-$mail->Port = $port;
+-$mail->SMTPSecure = 'tls'; 
+-$mail->setFrom($emailFrom, $emailFromName);
+-$mail->addAddress($emailTo, $emailToName);
+-$mail->Subject = $subject;
+-$mail->msgHTML($msg); //$mail->msgHTML(file_get_contents('contents.html'), __DIR__); //Read an HTML message body from an external file, convert referenced images to embedded,
+-$mail->AltBody = 'HTML messaging not supported';
+-// $mail->addAttachment('images/phpmailer_mini.png'); //Attach an image file
+-if(!$tulos = $mail->send()){
+-    //$tulos = false;
+-    debuggeri("Mailer Error: " . $mail->ErrorInfo);
+-}else{
+-    //$tulos = true;
+-    debuggeri("Viesti lähetetty: $emailTo!");
+-}
+-return $tulos;
+-}
