@@ -1,10 +1,8 @@
 <?php
-   
-    // Database connection
+    require('../../../tunnukset.php');
     include('config/db.php');
     include('debuggeri.php');
     include('posti.php');  
-    // Error & success messages
     global $success_msg, $email_exist, $f_NameErr, $l_NameErr, $_emailErr, $_mobileErr, $_passwordErr;
     global $fNameEmptyErr, $lNameEmptyErr, $emailEmptyErr, $mobileEmptyErr, $passwordEmptyErr, $email_verify_err, $email_verify_success;
     $passwordRegex = "/^.{16,}$/";
